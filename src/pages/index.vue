@@ -1,17 +1,18 @@
 <script setup lang="ts">
+import { useAxios } from '@vueuse/integrations/useAxios'
 import { useUserStore } from '~/stores/user'
 
 const user = useUserStore()
 const name = ref(user.savedName)
 
 const router = useRouter()
+const { data } = useAxios('https://www.google.com')
+const { t } = useI18n()
+
 const go = () => {
   if (name.value)
     router.push(`/hi/${encodeURIComponent(name.value)}`)
 }
-const { useAxios } = useAxios()
-
-const { t } = useI18n()
 </script>
 
 <template>
